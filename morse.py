@@ -16,15 +16,19 @@ Morse Sequence Description:
 import sys
 
 USAGE = '''\
-morse.py <encode|decode> "<message>"
+py morse.py <encode|decode> "<message>"
 
 examples:
-    morse.py encode "Hello World"
+    py morse.py encode "Hello World"
     .... . .-.. .-.. --- / .-- --- .-. .-.. -..
 
-    morse.py decode ".... . .-.. .-.. --- / .-- --- .-. .-.. -.."
+    py morse.py decode ".... . .-.. .-.. --- / .-- --- .-. .-.. -.."
     HELLO WORLD
 '''
+
+class MorseValueError(ValueError):
+    '''Custom Exception class for Invalid Morse encode or decode input'''
+    pass
 
 def warn(*args, **kwargs):
     '''print a string to stderr'''
@@ -36,7 +40,7 @@ def die(*args, **kwargs):
     sys.exit(1)
 
 # Dictionary of English letters and their corresponding Morse encodings
-alphabet = {
+english_morse_map = {
     'A': '.-',
     'B': '-...',
     'C': '-.-.',
@@ -85,14 +89,15 @@ alphabet = {
     '=': '-...-'
 }
 
-# dictionary using alphabet values as keys and vice-versa
-inverse_alphabet = dict((v, k) for (k, v) in alphabet.items())
+# reverse of English to Morse dictionary
+# having Morse codes as keys and English characters as values
+morse_english_map = dict((v, k) for (k, v) in english_morse_map.items())
 
-def morse_encode(msg):
+def encode(msg):
     '''encodes a given English text message and returns Morse code sequences'''
     return 'TODO'
 
-def morse_decode(msg):
+def decode(msg):
     '''decodes a given Morse code message and returns English plain text'''
     return 'TODO'
     
@@ -108,9 +113,9 @@ if __name__ == '__main__':
 
     # check for valid commands and call handler functions
     if cmd == 'encode':
-        res = morse_encode(msg)
+        res = encode(msg)
     elif cmd == 'decode':
-        res = morse_decode(msg)
+        res = decode(msg)
     else:
         warn(f"no such command: {cmd}\n")
         die(USAGE)
