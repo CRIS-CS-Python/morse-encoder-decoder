@@ -101,24 +101,3 @@ def decode(msg):
     '''decodes a given Morse code message and returns English plain text'''
     return 'TODO'
     
-if __name__ == '__main__':
-    # print error and exit if not correct arguments
-    if len(sys.argv) != 3:
-        die(USAGE)
-
-    # string containing command
-    cmd = sys.argv[1]
-    # English text or Morse sequences
-    msg = sys.argv[2]
-
-    # check for valid commands and call handler functions
-    if cmd == 'encode':
-        res = encode(msg)
-    elif cmd == 'decode':
-        res = decode(msg)
-    else:
-        warn(f"no such command: {cmd}\n")
-        die(USAGE)
-
-    # print results
-    print(res)
